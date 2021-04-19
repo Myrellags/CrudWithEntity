@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +14,7 @@ namespace CrudWithEntity
 {
     public partial class FormMenu : Form
     {
+        string nomeTabela;
         public FormMenu()
         {
             InitializeComponent();
@@ -53,5 +56,37 @@ namespace CrudWithEntity
             FormInsereTable FormInsereTable = new FormInsereTable();
             FormInsereTable.ShowDialog();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            listBox1.Items.Add(textBox2.Text);
+            textBox2.Text = "";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            nomeTabela = textBox1.Text;
+            MinhaBD bd = new MinhaBD();
+            string comandoTSQL = "EXEC sp_rename 'BDCrudWithEntity.Produtos', '" + nomeTabela + "';";
+            
+            
+        }
     }
+
+    class tabela
+    {
+        public int Id { get; set; }
+    }
+
+    class MinhaBD : DbContext 
+    {
+        public DbSet<tabela> nomeTabela { get; set; }
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=BDCrudWithEntity;Trusted_Connection=True;");
+        }
+
+        //comando.CommandText = "EXEC sp_rename 'BDCrudWithEntity.tabela'," + "'" + nomeTabela + "';";
+    }
+
 }
