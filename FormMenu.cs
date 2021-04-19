@@ -85,8 +85,6 @@ namespace CrudWithEntity
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=BDCrudWithEntity;Trusted_Connection=True;");
         }
-
-        //comando.CommandText = "EXEC sp_rename 'BDCrudWithEntity.tabela'," + "'" + nomeTabela + "';";
     }
 
 }
