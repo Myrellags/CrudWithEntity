@@ -10,12 +10,11 @@ using System.Windows.Forms;
 
 namespace CrudWithEntity
 {
-    public partial class Form1 : Form
+    public partial class FormInsereTable : Form
     {
-        public Form1()
+        public FormInsereTable()
         {
             InitializeComponent();
         }
-
     }
 }
