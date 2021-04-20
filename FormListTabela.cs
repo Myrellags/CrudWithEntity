@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace CrudWithEntity
 {
-    public partial class FormListarTabelas : Form
+    public partial class FormListTabela : Form
     {
-        public FormListarTabelas()
+        public FormListTabela()
         {
             InitializeComponent();
         }

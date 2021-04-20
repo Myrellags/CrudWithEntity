@@ -40,8 +40,14 @@ namespace CrudWithEntity
             button2.Visible = false;
             listBox1.Visible = false;
             button3.Visible = false;
-            FormListarTabelas FormListarTabelas = new FormListarTabelas();
-            FormListarTabelas.ShowDialog();
+            //SqlDataAdapter da = null;
+            //MinhaBD bd = new MinhaBD();
+            //bd.Database.ExecuteSqlRaw("SELECT * FROM Cliente");
+            //DataTable clientes = new DataTable();
+            //da.Fill(clientes);
+            
+            //FormListarTabelas FormListarTabelas = new FormListarTabelas();
+            //FormListarTabelas.ShowDialog();
         }
 
         private void button4_Click(object sender, EventArgs e)
