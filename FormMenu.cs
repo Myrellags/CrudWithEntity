@@ -60,15 +60,31 @@ namespace CrudWithEntity
         private void button2_Click(object sender, EventArgs e)
         {
             listBox1.Items.Add(textBox2.Text);
+            string campo = textBox2.Text;
+            int y = listBox1.Items.Count;
             textBox2.Text = "";
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string tabela1 = "dbo.Fornecedor";
+            bool sucesso = false;
+            string tabela1 = "dbo.Tabela";
             string tabela2 = textBox1.Text;
             MinhaBD bd = new MinhaBD();
-            bd.Database.ExecuteSqlRaw("EXEC sp_rename {0}, {1}", tabela1, tabela2);           
+            bd.Database.ExecuteSqlRaw("EXEC sp_rename {0}, {1}", tabela1, tabela2);    
+            foreach (var item in listBox1.Items)
+            {
+                string coluna = item.ToString();
+                bd.Database.ExecuteSqlRaw("ALTER TABLE dbo." + tabela2 + " ADD " + coluna + " VARCHAR(40) NULL;");
+                sucesso = true;
+            }
+            bd.Database.ExecuteSqlRaw("CREATE TABLE Tabela (Id INT IDENTITY(1,1));");
+            textBox1.Text = "";
+            listBox1.Items.Clear();
+            if (sucesso = true) 
+            {
+                MessageBox.Show("Tabela criada com sucesso");
+            }
         }
     }
 
@@ -79,7 +95,7 @@ namespace CrudWithEntity
 
     class MinhaBD : DbContext 
     {
-        public DbSet<tabela> nomeTabela { get; set; }
+        public DbSet<tabela> tabela { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=BDCrudWithEntity;Trusted_Connection=True;");
