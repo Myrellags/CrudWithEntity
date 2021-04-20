@@ -65,11 +65,10 @@ namespace CrudWithEntity
 
         private void button3_Click(object sender, EventArgs e)
         {
-            nomeTabela = textBox1.Text;
+            string tabela1 = "dbo.Fornecedor";
+            string tabela2 = textBox1.Text;
             MinhaBD bd = new MinhaBD();
-            string comandoTSQL = "EXEC sp_rename 'BDCrudWithEntity.Produtos', '" + nomeTabela + "';";
-            
-            
+            bd.Database.ExecuteSqlRaw("EXEC sp_rename {0}, {1}", tabela1, tabela2);           
         }
     }
 
